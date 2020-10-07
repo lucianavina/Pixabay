@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Error from '../Error/index'
 
-const Form = () => {
+const Form = ({saveSearch}) => {
 
     const [theme, saveTheme] = useState('')
     const [error, saveError] = useState(false)
@@ -20,6 +20,7 @@ const Form = () => {
         saveError(false)
 
         //send search to the main component
+        saveSearch(theme)
     }
 
     return ( 
