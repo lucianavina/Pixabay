@@ -1,14 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react'
+import Error from '../Error/index'
 
 const Form = () => {
+
+    const [theme, saveTheme] = useState('')
+    const [error, saveError] = useState(false)
+    
+
+    const searchImages = e => {
+        e.preventDefault()
+
+        //check
+
+        if (theme.trim() === '') {
+            saveError(true)
+            return
+        }
+
+        saveError(false)
+
+        //send search to the main component
+    }
+
     return ( 
-        <form>
+        <form
+            onSubmit={searchImages}
+        >
             <div className='row'>
                 <div className='form-group col-md-8'>
                     <input
                         type='text'
                         className='form-control form-control-lg'
                         placeholder=' Busca una imágenn, ej.: fútbol o café'
+                        onChange={ e => saveTheme(e.target.value)}
                         />
                 </div>
                 <div className='form-group col-md-4'>
@@ -19,6 +43,7 @@ const Form = () => {
                         />
                 </div>
             </div>
+            {error? <Error messaje='Agrega un término de búsqueda'/> : null}
         </form>
      );
 }
